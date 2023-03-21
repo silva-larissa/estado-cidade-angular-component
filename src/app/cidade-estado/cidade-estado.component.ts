@@ -1,3 +1,4 @@
+import { TesteComponent } from './../teste/teste.component';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import DataSource from 'devextreme/data/data_source';
 import { ConsultaEstadoService } from '../services/consulta-estado.service';
@@ -28,11 +29,12 @@ export class CidadeEstadoComponent implements OnInit {
     this.estadoChange.emit(value);
   }
 
-  @Output()
-  estadoChange: EventEmitter<Estado> = new EventEmitter<Estado>();
-
   @Input()
   cidade?: Cidade;
+
+  @Output()
+  estadoChange: EventEmitter<Estado> = new EventEmitter<Estado>();
+  cidadeChange: EventEmitter<Cidade> = new EventEmitter<Cidade>();
 
   constructor(
     private estadoService: ConsultaEstadoService,
@@ -60,6 +62,13 @@ export class CidadeEstadoComponent implements OnInit {
     return this.cidadeService
       .getCidades(uf)
       .subscribe(resultado => {this.cidades = resultado});
+  }
+
+  getCidadeSelecionada (ev: any){
+    this.cidadeChange.emit(ev.selectedItem);
+    const cidadeSelecionada = ev.selectedItem.nome;
+    console.log(cidadeSelecionada);
+    return cidadeSelecionada;
   }
 
 }

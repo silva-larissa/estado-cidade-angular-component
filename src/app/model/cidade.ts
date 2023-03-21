@@ -12,4 +12,8 @@ export class Cidade {
 
   }
 
+  getDisplayValue(){
+    return this.nome;
+  }
+
 }

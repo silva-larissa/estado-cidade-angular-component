@@ -14,8 +14,13 @@
   <p>Cidade:</p>
    <dx-select-box
       [items]="cidades"
-      displayExpr="nome"
+      [(value)]="cidade"
+      displayExpr="getDisplayValue"
       placeholder="Selecione a Cidade..."
+      (onSelectionChanged)="getCidadeSelecionada($event)"
       [showClearButton]="true"
     ></dx-select-box>
 </div>
+
+<p><strong>Estado selecionado:</strong> {{ estado ? estado.getDisplayValue() : '' }} </p>
+<p><strong>Cidade selecionada:</strong> {{ cidade ? cidade.getDisplayValue() : '' }} </p>
